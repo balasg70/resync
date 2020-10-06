@@ -1,0 +1,8 @@
+---
+# Tomcat Installation and Setup
+
+- name: Install curl, telnet and Oracle JDK
+  hosts: kp_devops
+  sudo: yes
+  roles:
+    - tomcat

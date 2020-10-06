@@ -1,0 +1,18 @@
+# Install telnet, curl and nslookup
+- name: install telnet and curl
+  yum: 
+    name: ['telnet', 'curl', 'bind-utils', 'firewalld'] 
+    state: present
+
+# Install Oracle JDK
+- name: Install Java 8
+  yum: name=java-1.8.0 state=present
+
+- name: Download Oracle JDK
+  get_url: 
+    url: "{{ download_url }}"
+    dest: /opt/{{ package_name }}.rpm
+    headers: 'Cookie: oraclelicense=accept-securebackup-cookie' 
+
+- name: Install Oracle JDK rpm from a local file
+  yum: name=/opt/{{ package_name }}.rpm state=present
