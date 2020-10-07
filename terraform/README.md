@@ -13,6 +13,9 @@ There are only two prerequisites for this:
 
 I have used Ubuntu as the OS in this tutorial but instructions should work with any operating system.
 
+Create a Key pair in AWS console with the name Testkey.pem and download it to your local desktop before running
+the terraform scripts.
+
 Infrastructure-as-Code
 
 Provision it with Terraform
