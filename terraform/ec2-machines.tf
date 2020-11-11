@@ -11,17 +11,15 @@ resource "aws_instance" "app" {
   }
   user_data = <<HEREDOC
   #!/bin/bash
-  yum update -y
-  yum install -y httpd24 php56 php56-mysqlnd
-  service httpd start
-  chkconfig httpd on
-  echo "<?php" >> /var/www/html/myApp.php
-  echo "\$conn = new mysqli('mydatabase.ShaanAWSDNS.internal', 'root', 'secret', 'test');" >> /var/www/html/myApp.php
-  echo "\$sql = 'SELECT * FROM Employees'; " >> /var/www/html/myApp.php
-  echo "\$result = \$conn->query(\$sql); " >>  /var/www/html/myApp.php
-  echo "while(\$row = \$result->fetch_assoc()) { echo 'the value is: ' . \$row['NAME'],  \$row['ADDRESS'];} " >> /var/www/html/myApp.php
-  echo "\$conn->close(); " >> /var/www/html/myApp.php
-  echo "?>" >> /var/www/html/myApp.php	
+  sudo yum update -y
+  sudo yum install -y postgresql10 postgresql10-server postgresql10-contrib postgresql10-libs docker
+  #service start
+  sudo systemctl enable docker.service
+  sudo systemctl enable postgresql-10.service
+  sudo systemctl start postgresql-10.service
+  sudo systemctl start docker.service
+  #chkconfig httpd on
+  sudo docker run -i -t servian/techchallengeapp:latest
 HEREDOC
 }
 
