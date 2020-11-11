@@ -1,9 +1,0 @@
----
-# Apache Installation
-
-- name: Install Apache, configure to start at server boot and listening on all interfaces on port 80
-  hosts: kp_devops
-  sudo: yes
-  roles:
-    - apache
- 
