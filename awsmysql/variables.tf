@@ -25,22 +25,22 @@ variable "endpoint" {
 
 variable "port" {
   description = "RDS connection port"
-  default     = ""
+  default     = "5432"
 }
 
 variable "master_username" {
   description = "RDS master user name"
-  default     = ""
+  default     = "postgres"
 }
 
 variable "master_password" {
   description = "RDS master password"
-  default     = ""
+  default     = "changeme"
 }
 
 variable "database" {
   description = "RDS database name"
-  default     = ""
+  default     = "app"
 }
 
 variable "shell_script" {
