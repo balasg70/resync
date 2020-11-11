@@ -1,4 +1,4 @@
-resource "aws_instance" "phpapp" {
+resource "aws_instance" "app" {
   ami           = lookup(var.AmiLinux, var.region)
   instance_type = "t2.micro"
   associate_public_ip_address = "true"
@@ -38,7 +38,12 @@ resource "aws_key_pair" "generated_key" {
 resource "aws_eip" "default" {
   vpc = true
 
-  instance                  = aws_instance.phpapp.id
+  instance                  = aws_instance.app.id
   #associate_with_public_ip  = "10.0.0.12"
   depends_on                = [aws_internet_gateway.gw]
+}
+
+resource "local_file" "pem_file" { 
+  filename = "${path.module}/demotest.pem"
+  content = tls_private_key.example.private_key_pem
 }
