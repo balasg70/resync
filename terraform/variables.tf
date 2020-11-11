@@ -1,5 +1,5 @@
 variable "region" {
-  default = "eu-west-2"
+  default = "ap-southeast-1"
 }
 variable "AmiLinux" {
   type = map
@@ -32,14 +32,14 @@ variable "Subnet-Private-AzA-CIDR" {
   description = "the cidr of the subnet"
 }
 variable "key_name" {
-  default = "Testkey"
+  default = "demotest"
   description = "the ssh key to use in the EC2 machines"
 }
 variable "DnsZoneName" {
   default = "ShaanAWSDNS.internal"
   description = "the internal dns name"
 }
-variable "kp_devops" {
-  type        = string
-  description = "EC2 Key pair name for the EC2"
-}
+#variable "kp_devops" {
+#  type        = string
+#  description = "EC2 Key pair name for the EC2"
+#}
