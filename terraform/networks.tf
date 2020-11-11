@@ -13,33 +13,3 @@ resource "aws_vpc" "terraformmain" {
       Name = "vpc_devops"
     }
 }
-
-resource "aws_s3_bucket" "terrafrom-state" {
-    bucket = "terrafrom-state"
-    
-    lifecycle {
-        prevent_destroy = true
-    }
-
-    versioning {
-        enabled = true
-    }
-
-server_side_encryption_configuration {
-        rule {
-            apply_server_side_encryption_by_default {
-                sse_algorithm = "AES256"
-            }
-        }
-    }
- }
-
-terraform {
-  required_version = ">= 0.12, < 0.13"
-
-  backend "s3" {
-    bucket = "terrafrom-state"
-    key = "aws-devops/terraform.tfstate"
-    region = "ap-southeast-1"
-  }
-}
