@@ -1,8 +1,0 @@
----
-# Telnet, Oracle JDK and Curl Installation
-
-- name: Install and Setup Mysql
-  hosts: kp_devops
-  sudo: yes
-  roles:
-    - mysql
