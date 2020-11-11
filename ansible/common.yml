@@ -1,9 +1,0 @@
----
-# Telnet, Oracle JDK and Curl Installation
-
-- name: Install curl, telnet and Oracle JDK
-  hosts: kp_devops
-  sudo: yes
-  roles:
-    - common
- 
