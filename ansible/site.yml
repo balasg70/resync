@@ -1,7 +1,0 @@
----
-# Main configuration file 
-
-- include: apache.yml
-- include: common.yml
-- include: tomcat.yml
-- include: mysql.yml
