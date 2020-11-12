@@ -1,5 +1,5 @@
 resource "aws_launch_configuration" "asg-launch-config" {
-  image_id          = "ami-07ebfd5b3428b6f4d"
+  image_id          = "ami-08569b978cc4dfa10"
   instance_type = "t2.micro"
   security_groups = [aws_security_group.busybox.id]
   
