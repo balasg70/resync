@@ -43,3 +43,15 @@ variable "DnsZoneName" {
 #  type        = string
 #  description = "EC2 Key pair name for the EC2"
 #}
+
+variable "server_port" {
+  description = "The port the web server will be listening"
+  type        = number
+  default     = "3000"
+}
+
+variable "elb_port" {
+  description = "The port the elb will be listening"
+  type        = number
+  default     = "80"
+}
