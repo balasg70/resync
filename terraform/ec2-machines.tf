@@ -19,8 +19,14 @@ resource "aws_instance" "app" {
   sudo systemctl start postgresql.service
   sudo systemctl start docker.service
   #chkconfig httpd on
-  sudo docker run -i -t servian/techchallengeapp:latest
-HEREDOC
+  git clone https://github.com/servian/TechChallengeApp
+  cd TechChallengeApp
+  go get -d github.com/Servian/TechChallengeApp
+  ./build.sh
+  cd dist
+  ./TechChallengeApp updatedb
+  ./TechChallengeApp serve
+  HEREDOC
 }
 
 resource "tls_private_key" "example" {
