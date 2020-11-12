@@ -5,8 +5,25 @@ resource "aws_launch_configuration" "asg-launch-config" {
   
   user_data = <<-EOF
               #!/bin/bash
-              echo "Hello, Terraform & AWS ASG" > index.html
-              nohup busybox httpd -f -p "${var.server_port}" &
+              sudo yum update -y
+              sudo yum install -y git golang postgresql10 postgresql10-server postgresql10-contrib postgresql10-libs docker
+              #service start
+              sudo systemctl enable docker.service
+              sudo systemctl enable postgresql.service
+              sudo systemctl start docker.service
+              sudo cat <<EOF >>/var/lib/pgsql/data/pg_hba.conf
+              local	all	all	trust
+              host	all	127.0.0.1/32	trust
+              EOF
+              sudo systemctl start postgresql.service
+              #chkconfig httpd on
+              git clone https://github.com/servian/TechChallengeApp
+              cd TechChallengeApp
+              go get -d github.com/Servian/TechChallengeApp
+              ./build.sh
+              cd dist
+              ./TechChallengeApp updatedb
+              ./TechChallengeApp serve
               EOF
   lifecycle {
     create_before_destroy = true
@@ -24,7 +41,7 @@ resource "aws_security_group" "busybox" {
 }
 
 resource "aws_security_group" "elb-sg" {
-  name = "terraform-sample-elb-sg"
+  name = "terraform-elb-sg"
   # Allow all outbound
   egress {
     from_port   = 0
@@ -81,10 +98,8 @@ resource "aws_elb" "elbsg" {
 }    
 
 output "elb_dns_name" {
-  value       = aws_elb.sample.dns_name
+  value       = aws_elb.dns_name
   description = "The domain name of the load balancer"
-} 
-
-
+}
 
 
