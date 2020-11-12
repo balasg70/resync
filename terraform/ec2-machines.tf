@@ -4,8 +4,8 @@ resource "aws_instance" "app" {
   associate_public_ip_address = "true"
   subnet_id = aws_subnet.PublicAZA.id
   vpc_security_group_ids = [aws_security_group.WebApp.id]
-  #key_name = var.key_name
-  key_name = "Testkey"
+  key_name = var.key_name
+  #key_name = "Testkey"
   tags = {
         Name = "ec2_devops"
   }
@@ -16,8 +16,12 @@ resource "aws_instance" "app" {
   #service start
   sudo systemctl enable docker.service
   sudo systemctl enable postgresql.service
-  sudo systemctl start postgresql.service
   sudo systemctl start docker.service
+  sudo cat <<EOF >>/var/lib/pgsql/data/pg_hba.conf
+  local	all	all	trust
+  host	all	127.0.0.1/32	trust
+  EOF
+  sudo systemctl start postgresql.service
   #chkconfig httpd on
   git clone https://github.com/servian/TechChallengeApp
   cd TechChallengeApp
