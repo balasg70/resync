@@ -1,3 +1,3 @@
-Node.js, Terraform, Ansible & MySQL
+Terraform deployment onto AWS Cloud Provision
 ========
 
