@@ -61,8 +61,8 @@ resource "aws_security_group" "elb-sg" {
 resource "aws_autoscaling_group" "asg" {
   launch_configuration = aws_launch_configuration.asg-launch-config.id
   availability_zones   = data.aws_availability_zones.all.names
-  min_size = 2
-  max_size = 5
+  min_size = 1
+  max_size = 3
   desired_capacity = 2
 
   load_balancers    = [aws_elb.elbsg.name]
