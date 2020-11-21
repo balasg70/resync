@@ -12,20 +12,12 @@ resource "aws_instance" "app" {
   user_data = <<HEREDOC
   #!/bin/bash
   sudo yum update -y
-  sudo yum install -y git postgresql10 postgresql10-server postgresql10-contrib postgresql10-libs docker
+  sudo yum install -y git docker
   #service start
   sudo systemctl enable docker.service
-  sudo systemctl enable postgresql.service
   sudo systemctl start docker.service
-  sudo cat <<EOF >>/var/lib/pgsql/data/pg_hba.conf
-  local	all	all	trust
-  host	all	127.0.0.1/32	trust
-  EOF
-  sudo systemctl start postgresql.service
   #chkconfig httpd on
-  git clone https://gitlab.com/jjneojiajun/resync-devops-test
-  cd resync-devops-test
-  python app/app.py
+  
   HEREDOC
 }
 
