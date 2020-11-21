@@ -16,8 +16,10 @@ resource "aws_instance" "app" {
   #service start
   sudo systemctl enable docker.service
   sudo systemctl start docker.service
-  #chkconfig httpd on
-  
+  git clone https://github.com/balasg70/resync
+  cd resync
+  docker build -t myapp .
+  docker run -ti myapp /bin/bash
   HEREDOC
 }
 
