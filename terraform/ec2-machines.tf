@@ -12,7 +12,7 @@ resource "aws_instance" "app" {
   user_data = <<HEREDOC
   #!/bin/bash
   sudo yum update -y
-  sudo yum install -y git golang postgresql10 postgresql10-server postgresql10-contrib postgresql10-libs docker
+  sudo yum install -y git postgresql10 postgresql10-server postgresql10-contrib postgresql10-libs docker
   #service start
   sudo systemctl enable docker.service
   sudo systemctl enable postgresql.service
@@ -23,13 +23,9 @@ resource "aws_instance" "app" {
   EOF
   sudo systemctl start postgresql.service
   #chkconfig httpd on
-  git clone https://github.com/servian/TechChallengeApp
-  cd TechChallengeApp
-  go get -d github.com/Servian/TechChallengeApp
-  ./build.sh
-  cd dist
-  ./TechChallengeApp updatedb
-  ./TechChallengeApp serve
+  git clone https://gitlab.com/jjneojiajun/resync-devops-test
+  cd resync-devops-test
+  python app/app.py
   HEREDOC
 }
 
