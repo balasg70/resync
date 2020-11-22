@@ -34,7 +34,5 @@ Deploy:
     - test-runner
   script:
     - echo "Do your deploy here"
-    - echo "Listing of the Master and worker nodes in cluster"
-    - docker build -t myapp . 
-    - docker run -ti myapp
+    - docker run -ti $DOCKER_REPO/$(echo $CI_PROJECT_PATH | tr A-Z a-z)
 
