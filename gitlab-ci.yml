@@ -21,6 +21,8 @@ Junit-test1:
   script:
     - echo "Do a test here"
     - echo "For example run a test suite"
+    - pip install pytest==2.9.1
+    - pytest app/app.py
 
 Deploy:
   stage: deploy
